@@ -5,7 +5,8 @@ const moods = ref(['Happy', 'Sad', 'Angry']);
 const subject = ref('');
 const entry = ref('');
 const mood = ref('');
-
+const showStatus = ref(false);
+const status = ref('');
 // Add Code Here
 async function add() {
     const url = "https://localhost:8000/posts"
@@ -15,13 +16,15 @@ async function add() {
         mood : mood.value
     }
 }
-
 try {
     const response = await axios.post(url, data)
     console.log(response.data)
-
+    showStatus.value = true
+    status.value = response.data
 } catch (error) {
-    
+    console.error(error)
+    showStatus.value = true
+    status.value = 'There was an error: ' + error.message
 }
 
 </script>
@@ -45,7 +48,7 @@ try {
             <option v-for="m in moods" :key="m" :value="m">{{ m }}</option>
         </select>
 
-        <br>
+        <br>   
         <button>Submit New Post</button>
 
         <hr>
