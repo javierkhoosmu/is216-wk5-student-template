@@ -25,6 +25,7 @@ const result = computed(() => {
     
 </script>
 
+
 <template>
     <p>x <input v-model.number="x"></p>
     <select v-model="selectedOp">
